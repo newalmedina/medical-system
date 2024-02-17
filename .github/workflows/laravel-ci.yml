@@ -13,6 +13,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Pull latest changes
+        run: git pull origin master
+
       - name: Install Composer dependencies
         run: composer install --no-progress --no-suggest --no-interaction
 
@@ -21,18 +24,15 @@ jobs:
 
       - name: clear cache
         run: php artisan cache:clear
-
       - name: clear view
         run: php artisan view:clear
-
       - name: clear config
         run: php artisan config:clear
-
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
 
       - name: Clear Laravel cache
         run: php artisan optimize:clear
 
-      - name: Run Laravel migrations
-        run: php artisan migrate --force --no-interaction
+      # - name: Run Laravel migrations
+      #   run: php artisan migrate --force --no-interaction
