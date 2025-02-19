@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
             ->appendOutputTo(storage_path('logs/cron.log'));
 
         $schedule->command(GenerateAppointment::class, ['--no-ansi'])
-            ->dailyAt('12:00')
+            ->dailyAt('13:00')
             ->appendOutputTo(storage_path('logs/generate-appointment.log'));
     }
 

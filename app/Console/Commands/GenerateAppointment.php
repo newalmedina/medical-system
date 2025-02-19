@@ -72,6 +72,6 @@ class GenerateAppointment extends Command
                 "finish_at" => $finish_at,
             ]);
         }
-        $this->info('Creando citas para el dia ' . Carbon::now()->format("d-m-Y"));
+        $this->info('Creando citas para el dia ' . Carbon::now()->format("d-m-Y H:i"));
     }
 }
