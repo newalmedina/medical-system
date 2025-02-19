@@ -11,6 +11,8 @@ class Appointment extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $guarded = []; // Permite todos los campos para asignación masiva
+
     public function createdBy()
     {
         return $this->belongsTo('App\Models\User', 'created_by', "id");
@@ -101,7 +103,7 @@ class Appointment extends Model
             !auth()->user()->isAbleTo('admin-dashboard-appointment-programadas-today-info-basica-doctor')      &&
             !auth()->user()->isAbleTo('admin-dashboard-appointment-programadas-today-info-basica-created-by-user')
         ) {
-            //si no tiene ninguno de los permisos no muestre ningun registro 
+            //si no tiene ninguno de los permisos no muestre ningun registro
 
             return false;
         } else {
@@ -130,7 +132,7 @@ class Appointment extends Model
             !auth()->user()->isAbleTo('admin-dashboard-appointment-programadas-today-facturar-doctor')      &&
             !auth()->user()->isAbleTo('admin-appointments-update-created-by-user')
         ) {
-            //si no tiene ninguno de los permisos no muestre ningun registro 
+            //si no tiene ninguno de los permisos no muestre ningun registro
 
             return false;
         } else {
@@ -159,7 +161,7 @@ class Appointment extends Model
             !auth()->user()->isAbleTo('admin-dashboard-appointment-programadas-today-end-doctor')      &&
             !auth()->user()->isAbleTo('admin-dashboard-appointment-programadas-today-end-created-by-user')
         ) {
-            //si no tiene ninguno de los permisos no muestre ningun registro 
+            //si no tiene ninguno de los permisos no muestre ningun registro
             return false;
         } else {
             if (!auth()->user()->isAbleTo('admin-dashboard-appointment-programadas-today-end-all')) {
@@ -189,7 +191,7 @@ class Appointment extends Model
             !auth()->user()->isAbleTo('admin-dashboard-appointment-programadas-today-doctor')      &&
             !auth()->user()->isAbleTo('admin-dashboard-appointment-programadas-today-created-by-user')
         ) {
-            //si no tiene ninguno de los permisos no muestre ningun registro 
+            //si no tiene ninguno de los permisos no muestre ningun registro
             $query->whereNull("appointments.id");
         } else {
 
@@ -219,7 +221,7 @@ class Appointment extends Model
             !auth()->user()->isAbleTo('admin-appointments-list-doctor')      &&
             !auth()->user()->isAbleTo('admin-appointments-list-created-by-user')
         ) {
-            //si no tiene ninguno de los permisos no muestre ningun registro 
+            //si no tiene ninguno de los permisos no muestre ningun registro
 
             $query->whereNull("appointments.id");
         } else {
@@ -244,7 +246,7 @@ class Appointment extends Model
             !auth()->user()->isAbleTo('admin-appointments-update-doctor')      &&
             !auth()->user()->isAbleTo('admin-appointments-update-created-by-user')
         ) {
-            //si no tiene ninguno de los permisos no muestre ningun registro 
+            //si no tiene ninguno de los permisos no muestre ningun registro
 
             return false;
         } else {
@@ -269,7 +271,7 @@ class Appointment extends Model
             !auth()->user()->isAbleTo('admin-appointments-read-doctor')      &&
             !auth()->user()->isAbleTo('admin-appointments-read-created-by-user')
         ) {
-            //si no tiene ninguno de los permisos no muestre ningun registro 
+            //si no tiene ninguno de los permisos no muestre ningun registro
 
             return false;
         } else {
@@ -300,7 +302,7 @@ class Appointment extends Model
             !auth()->user()->isAbleTo('admin-appointments-facturar-doctor')      &&
             !auth()->user()->isAbleTo('admin-appointments-facturar-created-by-user')
         ) {
-            //si no tiene ninguno de los permisos no muestre ningun registro 
+            //si no tiene ninguno de los permisos no muestre ningun registro
             return false;
         } else {
             if (!auth()->user()->isAbleTo('admin-appointments-facturar-all')) {
@@ -333,7 +335,7 @@ class Appointment extends Model
             !auth()->user()->isAbleTo('admin-appointments-end-doctor')      &&
             !auth()->user()->isAbleTo('admin-appointments-end-created-by-user')
         ) {
-            //si no tiene ninguno de los permisos no muestre ningun registro 
+            //si no tiene ninguno de los permisos no muestre ningun registro
             return false;
         } else {
             if (!auth()->user()->isAbleTo('admin-appointments-end-all')) {
@@ -363,7 +365,7 @@ class Appointment extends Model
             !auth()->user()->isAbleTo('admin-appointments-delete-doctor')      &&
             !auth()->user()->isAbleTo('admin-appointments-delete-created-by-user')
         ) {
-            //si no tiene ninguno de los permisos no muestre ningun registro 
+            //si no tiene ninguno de los permisos no muestre ningun registro
             return false;
         } else {
             if ($this->state == "facturado" && !auth()->user()->isAbleTo('admin-appointments-delete-facturar')) {
@@ -397,7 +399,7 @@ class Appointment extends Model
         if (
             !auth()->user()->isAbleTo('admin-appointments-delete-permanent')
         ) {
-            //si no tiene ninguno de los permisos no muestre ningun registro 
+            //si no tiene ninguno de los permisos no muestre ningun registro
             return false;
         }
         return true;
@@ -407,7 +409,7 @@ class Appointment extends Model
         if (
             !auth()->user()->isAbleTo('admin-appointments-restore-deleted')
         ) {
-            //si no tiene ninguno de los permisos no muestre ningun registro 
+            //si no tiene ninguno de los permisos no muestre ningun registro
             return false;
         }
         return true;
