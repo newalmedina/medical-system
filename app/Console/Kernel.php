@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\GenerateAppointment;
 use App\Console\Commands\HelloCron;
 use App\Jobs\EnviarCorreoJob;
 use Illuminate\Console\Scheduling\Schedule;
@@ -23,6 +24,10 @@ class Kernel extends ConsoleKernel
         $schedule->command(HelloCron::class, ['--no-ansi'])
             ->everyMinute()
             ->appendOutputTo(storage_path('logs/cron.log'));
+
+        $schedule->command(GenerateAppointment::class, ['--no-ansi'])
+            ->dailyAt('12:00')
+            ->appendOutputTo(storage_path('logs/generate-appointment.log'));
     }
 
     /**
